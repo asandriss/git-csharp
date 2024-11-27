@@ -1,6 +1,23 @@
 namespace codecrafters_git;
 
-public class InitCommand
+internal class InitCommand : IGitCommand
 {
-    
+    public string Execute(IEnumerable<string> args)
+    {
+        CreateGitDirectories();
+        InitHead();
+        return "Initialized git directory";
+    }
+
+    private static void InitHead()
+    {
+        File.WriteAllText(".git/HEAD", "ref: refs/heads/main\n");
+    }
+
+    private static void CreateGitDirectories()
+    {
+        Directory.CreateDirectory(".git");
+        Directory.CreateDirectory(".git/objects");
+        Directory.CreateDirectory(".git/refs");
+    }
 }

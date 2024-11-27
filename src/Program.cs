@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Linq.Expressions;
+using codecrafters_git;
 
 if (args.Length < 1)
 {
@@ -9,15 +11,8 @@ if (args.Length < 1)
 
 string command = args[0];
 
-if (command == "init")
+IGitCommand cmd = command switch
 {
-    Directory.CreateDirectory(".git");
-    Directory.CreateDirectory(".git/objects");
-    Directory.CreateDirectory(".git/refs");
-    File.WriteAllText(".git/HEAD", "ref: refs/heads/main\n");
-    Console.WriteLine("Initialized git directory");
-}
-else
-{
-    throw new ArgumentException($"Unknown command {command}");
-}
+     "init" => new InitCommand(),
+     _ => throw new ArgumentException(),
+};
