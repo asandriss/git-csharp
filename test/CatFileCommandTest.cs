@@ -31,7 +31,7 @@ public class CatFileCommandTest
     [Fact]
     public void ReadBlob_ItExists()
     {
-        var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "blob");
+        var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test/data", "blob");
         
         File.Exists(filePath).Should().BeTrue();
     }
@@ -40,7 +40,7 @@ public class CatFileCommandTest
     public void ReadBlob_HasCorrectContent()
     {
         var blobContent = "blob 13\0hello, world!";
-        var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "blob");
+        var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test/data", "blob");
         var actualFirstLine = CatFileCommand.ProcessDecompressedFile(filePath).FirstOrDefault();
 
         actualFirstLine.Should().Be(blobContent);
