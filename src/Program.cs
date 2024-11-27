@@ -9,10 +9,14 @@ if (args.Length < 1)
     return;
 }
 
-string command = args[0];
+var command = args.FirstOrDefault();
 
 IGitCommand cmd = command switch
 {
      "init" => new InitCommand(),
-     _ => throw new ArgumentException(),
+     "cat-file" => new CatFileCommand(),
+     _ => throw new ArgumentException("Please provide a command."),
 };
+
+var result = cmd.Execute(args.Skip(1));
+Console.WriteLine(result);
