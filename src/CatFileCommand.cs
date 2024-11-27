@@ -16,12 +16,16 @@ public class CatFileCommand : IGitCommand
 
     private IEnumerable<string> CatBlob(string blobHash)
     {
-        var fileRoot = AppDomain.CurrentDomain.BaseDirectory;
+        var fileRoot = Directory.GetCurrentDirectory();
         var file = GetFileLocationFromHash(fileRoot, blobHash);
-
+        
         foreach (var line in ProcessDecompressedFile(file))
         {
-            yield return line;
+            if(line.StartsWith("blob"))
+            {
+                var startIndex = line.IndexOf('\0') + 1;
+                yield return line[startIndex..];
+            }
         }
     }
 

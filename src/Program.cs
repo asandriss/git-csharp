@@ -19,4 +19,4 @@ IGitCommand cmd = command switch
 };
 
 var result = cmd.Execute(args.Skip(1));
-Console.WriteLine(result);
+Console.Write(result);

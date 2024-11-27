@@ -6,7 +6,7 @@ internal class InitCommand : IGitCommand
     {
         CreateGitDirectories();
         InitHead();
-        return "Initialized git directory";
+        return "Initialized git directory\n";
     }
 
     private static void InitHead()
